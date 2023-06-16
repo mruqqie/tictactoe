@@ -2,18 +2,12 @@ import React from "react";
 import "./Board.css"
 import Box from "../box/Box";
 
-const Board = () => {
+const Board = ({mark, onClick}) => {
 	return (
 		<div className="board">
-			<Box value="O" />
-			<Box value="X" />
-			<Box value="O" />
-			<Box value="X" />
-			<Box value="O" />
-			<Box value="X" />
-			<Box value="O" />
-			<Box value="X" />
-			<Box value="O" />
+			{mark.map((value, index) => {
+				return <Box value={value} onClick={() => onClick(index)} />
+			})}
 		</div>
 	);
 };

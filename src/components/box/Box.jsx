@@ -1,11 +1,11 @@
 import React from "react";
 import "./Box.css"
 
-const Box = ({value}) => {
+const Box = ({value, onClick}) => {
     const val = value === "X" ? "box x" : "box o"
 	return (
 		<div>
-			<button className={val}>{value}</button>
+			<button className={val} onClick={onClick}>{value}</button>
 		</div>
 	);
 };
