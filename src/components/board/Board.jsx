@@ -6,7 +6,7 @@ const Board = ({mark, onClick}) => {
 	return (
 		<div className="board">
 			{mark.map((value, index) => {
-				return <Box value={value} onClick={() => onClick(index)} />
+				return <Box value={value} onClick={() => value === null && onClick(index)} />
 			})}
 		</div>
 	);
