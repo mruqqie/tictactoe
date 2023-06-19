@@ -53,6 +53,7 @@ function App() {
 			setPlayer(!player);
 		}
 	};
+	
 
 	const checkWinner = (board) => {
 		for (let i = 0; i < winConditions.length; i++) {
