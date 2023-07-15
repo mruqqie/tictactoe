@@ -18,7 +18,7 @@ function App() {
 		[2, 4, 6],
 	];
 	const [scores, setScores] = useState({ xScore: 0, oScore: 0 });
-	const [gameOver, setGameOver] = useState(false)
+	const [gameOver, setGameOver] = useState(false);
 
 	const handleClick = (boxIndex) => {
 		const updatedBoard = mark.map((value, index) => {
@@ -37,14 +37,14 @@ function App() {
 					oScore += 1;
 				}
 				setScores({ ...scores, oScore });
-				setGameOver(true)
+				setGameOver(true);
 			} else {
 				let { xScore } = scores;
 				if (gameOver === false) {
 					xScore += 1;
 				}
 				setScores({ ...scores, xScore });
-				setGameOver(true)
+				setGameOver(true);
 			}
 		}
 
@@ -53,14 +53,12 @@ function App() {
 			setPlayer(!player);
 		}
 	};
-	
 
 	const checkWinner = (board) => {
 		for (let i = 0; i < winConditions.length; i++) {
 			const [x, y, z] = winConditions[i];
 
 			if (board[x] === board[y] && board[y] === board[z]) {
-				
 				return board[x];
 			}
 		}
@@ -68,15 +66,58 @@ function App() {
 	};
 
 	const resetBoard = () => {
-		setGameOver(false)
-		setMark(Array(9).fill(null))
+		setGameOver(false);
+		setMark(Array(9).fill(null));
+	};
+
+	useEffect(() => {
+		if (player === false && !gameOver) {
+			const updatedBoard = computerMove(board);
+			setMark(updatedBoard);
+			setPlayer(!player);
+		}
+	}, [player, gameOver]);
+
+	const minimax = (board, depth, maximizingPlayer) => {
+		const winner = checkWinner(board);
+		if (winner !== null) {
+			return evaluate(winner, depth)
+		}
 	}
+
+	const evaluate = (winner, depth) => {
+		if (winner === " X") {
+			return 10 - depth;
+		} else if (winner === "O") {
+			return depth - 10;
+		} else {
+			return 0;
+		}
+	};
+
+	const possibleMoves = (board) => {
+		return board.map((value, index) => {
+			if (value === null) {
+				return index;
+			}
+		});
+	};
+
+	const makeMove = (board, move, player) => {
+		return board.map((value, index) => {
+			if (index === move) {
+				return player;
+			} else {
+				return value;
+			}
+		});
+	};
 
 	return (
 		<div className="App">
 			<ScoreBoard scores={scores} player={player} />
 			<Board mark={mark} onClick={handleClick} />
-			<Reset reset={resetBoard}/>
+			<Reset reset={resetBoard} />
 		</div>
 	);
 }
