@@ -3,8 +3,6 @@ import "./App.css";
 import Board from "./components/board/Board";
 import ScoreBoard from "./components/scoreBoard/ScoreBoard";
 import Reset from "./components/reset/Reset";
-import Multiplayer from "./components/playType/Multiplayer";
-import PwComputer from "./components/playType/PwComputer";
 
 function App() {
 	const [mark, setMark] = useState(Array(9).fill(null));
@@ -23,7 +21,7 @@ function App() {
 	const [gameOver, setGameOver] = useState(false);
 
 	useEffect(() => {
-		if (!gameOver && !player) {
+		if (!gameOver && player) {
 			const updatedBoard = computerMove(mark);
 			const winner = checkWinner(updatedBoard);
 			if (winner) {
@@ -52,7 +50,7 @@ function App() {
 	}, [player, mark, scores, gameOver]);
 
 	const handleClick = (boxIndex) => {
-		if (player && !gameOver) {
+		if (!player && !gameOver) {
 			const updatedBoard = mark.map((value, index) => {
 				if (index === boxIndex) {
 					return "O";
@@ -125,7 +123,7 @@ function App() {
 		for (let i = 0; i < winConditions.length; i++) {
 			const [x, y, z] = winConditions[i];
 
-			if (board[x] === board[y] && board[y] === board[z]) {
+			if (board[x] && board[x] === board[y] && board[y] === board[z]) {
 				return board[x];
 			}
 		}
@@ -135,23 +133,54 @@ function App() {
 	const resetBoard = () => {
 		setGameOver(false);
 		setMark(Array(9).fill(null));
+		setPlayer(Math.random() < 0.5)
 	};
 
 	const computerMove = (board) => {
 		let bestScore = -Infinity;
 		let bestMove;
+		let oppWinMove = null;
 
 		for (let move of possibleMoves(board)) {
 			const newBoard = makeMove(board, move, "X");
-			const score = minimax(newBoard, 0, false);
 
-			if (score > bestScore) {
-				bestScore = score;
-				bestMove = move;
+
+			if (checkOppBoutToWin(newBoard, "X")) {
+				oppWinMove = checkOppBoutToWin(newBoard, "X");
+			} else {
+				const score = minimax(newBoard, 0, false);
+
+				if (score > bestScore) {
+					bestScore = score;
+					bestMove = move;
+				}
 			}
 		}
 
-		return makeMove(board, bestMove, "X");
+		if (checkOppBoutToWin(board, "O")) {
+			return makeMove(board, checkOppBoutToWin(board, "O"), "X")
+		} else if (oppWinMove !== null) {
+			return makeMove(board, oppWinMove, "X")
+		} else {
+			return makeMove(board, bestMove, "X")
+		}
+	};
+
+	const checkOppBoutToWin = (board, player) => {
+		for (let i = 0; i < winConditions.length; i++) {
+			const [x, y, z] = winConditions[i];
+
+			if (
+				board[x] &&
+				board[x] === board[y] &&
+				board[x] !== player &&
+				board[z] === null
+			) {
+				return z;
+			}
+		}
+
+		return null;
 	};
 
 	const minimax = (board, depth, maximizingPlayer) => {
@@ -212,10 +241,6 @@ function App() {
 
 	return (
 		<div className="App">
-			{/* <div className="playType">
-				<Multiplayer />
-				<PwComputer />
-			</div> */}
 			<ScoreBoard scores={scores} player={player} />
 			<Board mark={mark} onClick={handleClick} />
 			<Reset reset={resetBoard} />
