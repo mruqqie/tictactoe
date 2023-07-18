@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Board from "./components/board/Board";
 import ScoreBoard from "./components/scoreBoard/ScoreBoard";
 import Reset from "./components/reset/Reset";
+import Multiplayer from "./components/playType/Multiplayer";
+import PwComputer from "./components/playType/PwComputer";
 
 function App() {
 	const [mark, setMark] = useState(Array(9).fill(null));
@@ -20,39 +22,104 @@ function App() {
 	const [scores, setScores] = useState({ xScore: 0, oScore: 0 });
 	const [gameOver, setGameOver] = useState(false);
 
-	const handleClick = (boxIndex) => {
-		const updatedBoard = mark.map((value, index) => {
-			if (index === boxIndex) {
-				return player === true ? "X" : "O";
-			} else {
-				return value;
+	useEffect(() => {
+		if (!gameOver && !player) {
+			const updatedBoard = computerMove(mark);
+			const winner = checkWinner(updatedBoard);
+			if (winner) {
+				if (winner === "O") {
+					let { oScore } = scores;
+					if (gameOver === false) {
+						oScore += 1;
+					}
+					setScores({ ...scores, oScore });
+					setGameOver(true);
+				} else {
+					let { xScore } = scores;
+					if (gameOver === false) {
+						xScore += 1;
+					}
+					setScores({ ...scores, xScore });
+					setGameOver(true);
+				}
 			}
-		});
 
-		const winner = checkWinner(updatedBoard);
-		if (winner) {
-			if (winner === "O") {
-				let { oScore } = scores;
-				if (gameOver === false) {
-					oScore += 1;
-				}
-				setScores({ ...scores, oScore });
-				setGameOver(true);
-			} else {
-				let { xScore } = scores;
-				if (gameOver === false) {
-					xScore += 1;
-				}
-				setScores({ ...scores, xScore });
-				setGameOver(true);
+			if (gameOver === false) {
+				setMark(updatedBoard);
+				setPlayer(!player);
 			}
 		}
+	}, [player, mark, scores, gameOver]);
 
-		if (gameOver === false) {
-			setMark(updatedBoard);
-			setPlayer(!player);
+	const handleClick = (boxIndex) => {
+		if (player && !gameOver) {
+			const updatedBoard = mark.map((value, index) => {
+				if (index === boxIndex) {
+					return "O";
+				} else {
+					return value;
+				}
+			});
+
+			const winner = checkWinner(updatedBoard);
+			if (winner) {
+				if (winner === "O") {
+					let { oScore } = scores;
+					if (gameOver === false) {
+						oScore += 1;
+					}
+					setScores({ ...scores, oScore });
+					setGameOver(true);
+				} else {
+					let { xScore } = scores;
+					if (gameOver === false) {
+						xScore += 1;
+					}
+					setScores({ ...scores, xScore });
+					setGameOver(true);
+				}
+			}
+
+			if (gameOver === false) {
+				setMark(updatedBoard);
+				setPlayer(!player);
+			}
 		}
 	};
+
+	// const handleClick = (boxIndex) => {
+	// 	const updatedBoard = mark.map((value, index) => {
+	// 		if (index === boxIndex) {
+	// 			return player === true ? "X" : "O";
+	// 		} else {
+	// 			return value;
+	// 		}
+	// 	});
+
+	// 	const winner = checkWinner(updatedBoard);
+	// 	if (winner) {
+	// 		if (winner === "O") {
+	// 			let { oScore } = scores;
+	// 			if (gameOver === false) {
+	// 				oScore += 1;
+	// 			}
+	// 			setScores({ ...scores, oScore });
+	// 			setGameOver(true);
+	// 		} else {
+	// 			let { xScore } = scores;
+	// 			if (gameOver === false) {
+	// 				xScore += 1;
+	// 			}
+	// 			setScores({ ...scores, xScore });
+	// 			setGameOver(true);
+	// 		}
+	// 	}
+
+	// 	if (gameOver === false) {
+	// 		setMark(updatedBoard);
+	// 		setPlayer(!player);
+	// 	}
+	// };
 
 	const checkWinner = (board) => {
 		for (let i = 0; i < winConditions.length; i++) {
@@ -70,23 +137,50 @@ function App() {
 		setMark(Array(9).fill(null));
 	};
 
-	useEffect(() => {
-		if (player === false && !gameOver) {
-			const updatedBoard = computerMove(board);
-			setMark(updatedBoard);
-			setPlayer(!player);
+	const computerMove = (board) => {
+		let bestScore = -Infinity;
+		let bestMove;
+
+		for (let move of possibleMoves(board)) {
+			const newBoard = makeMove(board, move, "X");
+			const score = minimax(newBoard, 0, false);
+
+			if (score > bestScore) {
+				bestScore = score;
+				bestMove = move;
+			}
 		}
-	}, [player, gameOver]);
+
+		return makeMove(board, bestMove, "X");
+	};
 
 	const minimax = (board, depth, maximizingPlayer) => {
 		const winner = checkWinner(board);
 		if (winner !== null) {
-			return evaluate(winner, depth)
+			return evaluate(winner, depth);
 		}
-	}
+
+		if (maximizingPlayer) {
+			let maxScore = -Infinity;
+			for (let move of possibleMoves(board)) {
+				const newBoard = makeMove(board, move, "X");
+				const score = minimax(newBoard, depth + 1, false);
+				maxScore = Math.max(maxScore, score);
+			}
+			return maxScore;
+		} else {
+			let minScore = Infinity;
+			for (let move of possibleMoves(board)) {
+				const newBoard = makeMove(board, move, "O");
+				const score = minimax(newBoard, depth + 1, true);
+				minScore = Math.min(minScore, score);
+			}
+			return minScore;
+		}
+	};
 
 	const evaluate = (winner, depth) => {
-		if (winner === " X") {
+		if (winner === "X") {
 			return 10 - depth;
 		} else if (winner === "O") {
 			return depth - 10;
@@ -96,11 +190,14 @@ function App() {
 	};
 
 	const possibleMoves = (board) => {
-		return board.map((value, index) => {
-			if (value === null) {
-				return index;
-			}
-		});
+		return board
+			.map((value, index) => {
+				if (value === null) {
+					return index;
+				}
+				return null;
+			})
+			.filter((move) => move !== null);
 	};
 
 	const makeMove = (board, move, player) => {
@@ -115,6 +212,10 @@ function App() {
 
 	return (
 		<div className="App">
+			{/* <div className="playType">
+				<Multiplayer />
+				<PwComputer />
+			</div> */}
 			<ScoreBoard scores={scores} player={player} />
 			<Board mark={mark} onClick={handleClick} />
 			<Reset reset={resetBoard} />
