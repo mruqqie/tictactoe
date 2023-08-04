@@ -3,6 +3,9 @@ import "./App.css";
 import Board from "./components/board/Board";
 import ScoreBoard from "./components/scoreBoard/ScoreBoard";
 import Reset from "./components/reset/Reset";
+import Register from "./components/register/Register";
+import Login from "./components/login/Login";
+import Home from "./components/home/Home";
 
 function App() {
 	const [mark, setMark] = useState(Array(9).fill(null));
@@ -51,37 +54,37 @@ function App() {
 
 	const handleClick = (boxIndex) => {
 		if (!player && !gameOver) {
-			const updatedBoard = mark.map((value, index) => {
-				if (index === boxIndex) {
+		const updatedBoard = mark.map((value, index) => {
+			if (index === boxIndex) {
 					return "O";
-				} else {
-					return value;
-				}
-			});
-
-			const winner = checkWinner(updatedBoard);
-			if (winner) {
-				if (winner === "O") {
-					let { oScore } = scores;
-					if (gameOver === false) {
-						oScore += 1;
-					}
-					setScores({ ...scores, oScore });
-					setGameOver(true);
-				} else {
-					let { xScore } = scores;
-					if (gameOver === false) {
-						xScore += 1;
-					}
-					setScores({ ...scores, xScore });
-					setGameOver(true);
-				}
+			} else {
+				return value;
 			}
+		});
 
-			if (gameOver === false) {
-				setMark(updatedBoard);
-				setPlayer(!player);
+		const winner = checkWinner(updatedBoard);
+		if (winner) {
+			if (winner === "O") {
+				let { oScore } = scores;
+				if (gameOver === false) {
+					oScore += 1;
+				}
+				setScores({ ...scores, oScore });
+				setGameOver(true);
+			} else {
+				let { xScore } = scores;
+				if (gameOver === false) {
+					xScore += 1;
+				}
+				setScores({ ...scores, xScore });
+				setGameOver(true);
 			}
+		}
+
+		if (gameOver === false) {
+			setMark(updatedBoard);
+			setPlayer(!player);
+		}
 		}
 	};
 
@@ -148,13 +151,13 @@ function App() {
 			if (checkOppBoutToWin(newBoard, "X")) {
 				oppWinMove = checkOppBoutToWin(newBoard, "X");
 			} else {
-				const score = minimax(newBoard, 0, false);
+			const score = minimax(newBoard, 0, false);
 
-				if (score > bestScore) {
-					bestScore = score;
-					bestMove = move;
-				}
+			if (score > bestScore) {
+				bestScore = score;
+				bestMove = move;
 			}
+		}
 		}
 
 		if (checkOppBoutToWin(board, "O")) {
@@ -241,9 +244,10 @@ function App() {
 
 	return (
 		<div className="App">
-			<ScoreBoard scores={scores} player={player} />
+			{/* <ScoreBoard scores={scores} player={player} />
 			<Board mark={mark} onClick={handleClick} />
-			<Reset reset={resetBoard} />
+			<Reset reset={resetBoard} /> */}
+			<Login />
 		</div>
 	);
 }
