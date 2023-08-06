@@ -3,9 +3,9 @@ import "./App.css";
 import Board from "./components/board/Board";
 import ScoreBoard from "./components/scoreBoard/ScoreBoard";
 import Reset from "./components/reset/Reset";
-import Register from "./components/register/Register";
 import Login from "./components/login/Login";
 import Home from "./components/home/Home";
+import Register from "./components/register/Register";
 
 function App() {
 	const [mark, setMark] = useState(Array(9).fill(null));
@@ -247,7 +247,7 @@ function App() {
 			{/* <ScoreBoard scores={scores} player={player} />
 			<Board mark={mark} onClick={handleClick} />
 			<Reset reset={resetBoard} /> */}
-			<Login />
+			<Home />
 		</div>
 	);
 }

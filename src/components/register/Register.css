@@ -5,7 +5,7 @@ body {
     height: 100vh;
     margin: 0;
 }
-.form {
+.regForm {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -17,7 +17,7 @@ body {
     height: 400px;
 }
 
-input {
+.regInput {
     margin-left: 25px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px black;
@@ -28,17 +28,17 @@ input {
     outline: none;
 }
 
-input:hover {
+.regInput:hover {
     box-shadow: 0px 0px 7px black;
 }
 
-.input {
+.regInput {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-button {
+.regButton {
     border: none;
     background-color: white;
     border-radius: 10%;
@@ -50,7 +50,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.regButton:hover {
     box-shadow: 0px 0px 10px black;
 }
 
@@ -66,4 +66,96 @@ button:hover {
 .reg span {
     cursor: pointer;
     text-decoration: underline;
+}
+
+@media (max-width: 650px) {
+
+}
+
+@media (max-width: 580px) {
+    .regForm {
+        width: 450px;
+        height: 400px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .regInput {
+        width: 250px;
+    }
+}
+
+@media (max-width: 500px) {
+    .regForm {
+        width: 350px;
+        height: 350px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .regInput {
+        width: 350px;
+        margin-left: 0px;
+    }
+
+    .reg {
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    .regLabel {
+        display: none;
+    }
+}
+
+@media (max-width: 410px) {
+    .regForm {
+        width: 300px;
+        height: 350px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .register{
+        font-size: large;
+    }
+
+    .reg {
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    .regButton {
+        width: 75px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 350px) {
+    .regForm {
+        width: 220px;
+        height: 300px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .register{
+        font-size: large;
+    }
+
+    .regInput {
+        width: 240px;
+        margin-left: 0px;
+    }
+
+    .reg {
+        text-align: center;
+        padding-top: 10px;
+        font-size: small;
+    }
+
+    .regButton {
+        width: 75px;
+        height: 30px;
+    }
 }

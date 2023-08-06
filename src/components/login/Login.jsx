@@ -6,11 +6,12 @@ const Login = () => {
 	const [password, setPassword] = useState("");
 	return (
 		<div>
-			<form className="form">
+			<form className="loginForm">
 				<div className="login">Login</div>
 				<div className="input">
-					<label>Email</label>
+					<label className="loginLabel">Email</label>
 					<input
+						className="loginInput"
 						type="email"
 						placeholder="Enter your email"
 						value={email}
@@ -20,8 +21,9 @@ const Login = () => {
 					/>
 				</div>
 				<div className="input">
-					<label>Password</label>
+					<label className="loginLabel">Password</label>
 					<input
+						className="loginInput"
 						type="password"
 						placeholder="Enter your password"
 						value={password}
@@ -30,10 +32,10 @@ const Login = () => {
 						}}
 					/>
 				</div>
-				<button type="submit" onClick={null}>
+				<button className="loginButton" type="submit" onClick={null}>
 					Login
 				</button>
-				<div className="reg">Not registered? Click to <span>sign up</span>.</div>
+				<div className="reg">Not registered? Click here to <span>sign up</span>.</div>
 			</form>
 		</div>
 	);

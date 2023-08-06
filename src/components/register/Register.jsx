@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Register.css";
+import "./Register.css"
 
 const Register = () => {
 	const [email, setEmail] = useState("");
@@ -8,12 +8,14 @@ const Register = () => {
 
 	return (
 		<div>
-			<form className="form">
+			<form className="regForm">
 				<div className="register">Register</div>
 				<div className="input">
-					<label>Email</label>
+					<label className="regLabel">Email</label>
 					<input
+						className="regInput"
 						type="email"
+						placeholder="Email"
 						value={email}
 						onChange={(e) => {
 							setEmail(e.target.value);
@@ -21,9 +23,11 @@ const Register = () => {
 					/>
 				</div>
 				<div className="input">
-					<label>Password</label>
+					<label className="regLabel">Password</label>
 					<input
+						className="regInput"
 						type="password"
+						placeholder="Password"
 						value={password}
 						onChange={(e) => {
 							setPassword(e.target.value);
@@ -31,17 +35,19 @@ const Register = () => {
 					/>
 				</div>
 				<div className="input">
-					<label>Confirm Password</label>
+					<label className="regLabel">Confirm Password</label>
 					<input
+						className="regInput"
 						type="password"
+						placeholder="Confirm Password"
 						value={confirmPassword}
 						onChange={(e) => {
 							setConfirmPassword(e.target.value);
 						}}
 					/>
 				</div>
-				<button type="submit">Register</button>
-				<div className="reg">Registered? Click to <span>log in</span>.</div>
+				<button className="regButton" type="submit">Register</button>
+				<div className="reg">Registered? Click here to <span>log in</span>.</div>
 			</form>
 		</div>
 	);

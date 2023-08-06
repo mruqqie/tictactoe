@@ -5,7 +5,7 @@ body {
     height: 100vh;
     margin: 0;
 }
-.form {
+.loginForm {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -17,7 +17,7 @@ body {
     height: 400px;
 }
 
-input {
+.loginInput {
     margin-left: 25px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px black;
@@ -28,7 +28,7 @@ input {
     outline: none;
 }
 
-input:hover {
+.loginInput:hover {
     box-shadow: 0px 0px 7px black;
 }
 
@@ -38,7 +38,7 @@ input:hover {
     align-items: center;
 }
 
-button {
+.loginButton {
     border: none;
     background-color: white;
     border-radius: 10%;
@@ -50,7 +50,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.loginButton:hover {
     box-shadow: 0px 0px 10px black;
 }
 
@@ -69,25 +69,25 @@ button:hover {
 }
 
 @media (max-width: 650px) {
-    .form {
+    .loginForm {
         width: 400px;
         height: 400px;
     }
 
-    input {
+    .loginInput {
         width: 250px;
     }
 }
 
 @media (max-width: 515px) {
-    .form {
+    .loginForm {
         width: 350px;
         height: 350px;
         padding-left: 15px;
         padding-right: 15px;
     }
 
-    input {
+    .loginInput {
         width: 200px;
     }
 
@@ -99,14 +99,14 @@ button:hover {
 }
 
 @media (max-width: 410px) {
-    .form {
+    .loginForm {
         width: 300px;
         height: 350px;
         padding-left: 15px;
         padding-right: 15px;
     }
 
-    input {
+    .loginInput {
         width: 180px;
     }
 
@@ -119,14 +119,14 @@ button:hover {
         padding-top: 10px;
     }
 
-    button {
+    .loginButton {
         width: 70px;
         height: 40px;
     }
 }
 
 @media (max-width: 350px) {
-    .form {
+    .loginForm {
         width: 220px;
         height: 300px;
         padding-left: 20px;
@@ -141,7 +141,7 @@ button:hover {
         font-size: large;
     }
 
-    input {
+    .loginInput {
         width: 240px;
         margin-left: 0px;
     }
@@ -152,7 +152,7 @@ button:hover {
         font-size: small;
     }
 
-    button {
+    .loginButton {
         width: 60px;
         height: 30px;
     }
