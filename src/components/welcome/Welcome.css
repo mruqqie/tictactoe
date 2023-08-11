@@ -1,44 +1,39 @@
-.home {
+.welcome {
     display: flex;
-    gap: 100px;
+    align-items: center;
 }
 
-.homeButton {
+.welcomeButton {
     border: none;
     background-color: white;
     border-radius: 10%;
     box-shadow: 0px 0px 5px black;
     width: 180px;
     height: 100px;
+    margin: 50px;
     align-self: center;
     font-family: "Roboto Mono", sans-serif;
     cursor: pointer;
     font-size: x-large;
 }
 
-.homeButton:hover {
+.welcomeButton:hover {
     box-shadow: 0px 0px 10px black;
 }
 
 @media (max-width: 560px) {
-    .home {
-        gap: 70px;
-    }
-
-    .homeButton {
+    .welcomeButton {
         width: 130px;
         font-size: larger;
+        margin: 35px;
     }
 }
 
 @media (max-width: 400px) {
-    .home {
-        gap: 40px;
-    }
-
-    .homeButton {
+    .welcomeButton {
         width: 110px;
         height: 80px;
+        margin: 15px;
         font-size: large;
     }
 }
