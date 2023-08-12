@@ -5,6 +5,7 @@ import Reset from "../reset/Reset";
 import ScoreBoard from "../scoreBoard/ScoreBoard";
 
 const Pwc = () => {
+	const [search, setSearch] = useState("");
 	const [mark, setMark] = useState(Array(9).fill(null));
 	const [player, setPlayer] = useState(Math.random() < 0.5);
 	const winConditions = [
@@ -239,11 +240,26 @@ const Pwc = () => {
 	};
 	return (
 		<div>
+			<div className="search--poffline">
+				<form className="searchForm">
+					<input
+						className="searchInput"
+						placeholder="Search for a friend"
+						onChange={(e) => {
+							setSearch(e.target.value);
+						}}
+						value={search}
+					/>
+					<button className="sendReq" type="submit">
+						Send request
+					</button>
+				</form>
+				<button className="playOffline">Play with a friend offline</button>
+			</div>
 			<div className="score--reset">
 				<ScoreBoard scores={scores} player={player} />
 				<Reset reset={resetBoard} />
 			</div>
-
 			<div className="board">
 				{mark.map((value, index) => {
 					return (
