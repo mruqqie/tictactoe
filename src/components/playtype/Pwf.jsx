@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Box from "../box/Box";
-import "./Pwc.css";
 import Reset from "../reset/Reset";
 import ScoreBoard from "../scoreBoard/ScoreBoard";
+import chatIcon from "../../imgs/chaticon.svg";
+import "./Pwc.css";
 
 const Pwf = () => {
 	const [search, setSearch] = useState("");
@@ -103,6 +104,13 @@ const Pwf = () => {
 						/>
 					);
 				})}
+			</div>
+			<div className="req--chat">
+				<button className="req">Requests</button>
+				<button className="chat">
+					<div>Chat</div>
+					<img className="chatIcon" src={chatIcon} />
+				</button>
 			</div>
 		</div>
 	);

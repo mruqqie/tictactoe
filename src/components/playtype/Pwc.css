@@ -61,7 +61,7 @@
     background-color: white;
     border-radius: 8px;
     box-shadow: 0px 0px 5px black;
-    width: 120px;
+    width: 130px;
     height: 40px;
     align-self: center;
     font-family: "Roboto Mono", sans-serif;
@@ -79,7 +79,7 @@
     border-radius: 8px;
     box-shadow: 0px 0px 5px black;
     width: 220px;
-    height: 40px;
+    height: 45px;
     margin-bottom: 15px;
     margin-top: 10px;
     align-self: center;
@@ -90,6 +90,58 @@
 
 .playOffline:hover {
     box-shadow: 0px 0px 7px black;
+}
+
+.req--chat {
+    display: flex;
+    width: 95vw;
+    margin: 0px auto;
+    height: 40px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.req {
+    border: none;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px black;
+    width: 100px;
+    height: 40px;
+    align-self: center;
+    font-family: "Roboto Mono", sans-serif;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.req:hover {
+    box-shadow: 0px 0px 7px black;
+}
+
+.chat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: none;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px black;
+    width: 80px;
+    height: 40px;
+    align-self: center;
+    font-family: "Roboto Mono", sans-serif;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.chat:hover {
+    box-shadow: 0px 0px 7px black;
+}
+
+.chatIcon {
+    width: 20px;
+    height: 20px;
 }
 
 @media (max-width: 800px) {
@@ -103,12 +155,20 @@
     }
 
     .sendReq {
-        width: 120px;
+        width: 130px;
         height: 30px;
     }
     
     .playOffline {
         width: 220px;
+        height: 45px;
+    }
+
+    .req {
+        height: 30px;
+    }
+
+    .chat {
         height: 30px;
     }
 }
@@ -119,31 +179,53 @@
     }
     .score--reset {
         width: 350px;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        margin-top: 30px;
     }
+
     .searchForm {
         flex-direction: column;
-        height: 60px;
+        height: 80px;
         width: 205px;
     }
     
     .searchInput {
         width: 200px;
+        height: 25px;
         font-size: medium;
     }
 
     .sendReq {
         width: 95px;
-        height: 23px;
+        height: 40px;
         font-size: small;
         align-self: start;
     }
     
     .playOffline {
         width: 160px;
-        height: 23px;
+        height: 40px;
         font-size: small;
         align-self: auto;
+    }
+
+    .req--chat {
+        padding-top: 40px;
+    }
+
+    .req {
+        font-size: small;
+        width: 80px;
+    }
+
+    .chat {
+        font-size: small;
+        width: 65px;
+    }
+
+    .chatIcon {
+        width: 15px;
+        height: 15px;
     }
 }
 
@@ -154,35 +236,41 @@
         align-items: center;
         grid-column-gap: 0px;
     }
+
     .score--reset {
         width: 270px;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        margin-top: 40px;
     }
+
     .searchForm {
         flex-direction: column;
-        height: 50px;
+        height: 80px;
         width: 205px;
     }
     
     .searchInput {
         width: 150px;
-        height: 18px;
+        height: 25px;
         padding-left: 5px;
         font-size: small;
     }
 
     .sendReq {
-        width: 95px;
-        height: 18px;
+        width: 70px;
+        height: 40px;
         font-size: small;
         align-self: start;
     }
     
     .playOffline {
         width: 100px;
-        height: 43px;
+        height: 53px;
         align-self: auto;
         font-size: small;
+    }
+    .req--chat {
+        padding-top: 60px;
     }
 }
 
