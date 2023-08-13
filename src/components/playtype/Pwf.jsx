@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "../box/Box";
 import Reset from "../reset/Reset";
 import ScoreBoard from "../scoreBoard/ScoreBoard";
@@ -6,6 +7,8 @@ import chatIcon from "../../imgs/chaticon.svg";
 import "./Pwc.css";
 
 const Pwf = () => {
+	const navigate = useNavigate();
+
 	const [search, setSearch] = useState("");
 	const [mark, setMark] = useState(Array(9).fill(null));
 	const [player, setPlayer] = useState(Math.random() < 0.5);
@@ -73,6 +76,10 @@ const Pwf = () => {
 		setPlayer(Math.random() < 0.5);
 	};
 
+	const handlePwcClick = () => {
+		navigate("/")
+	}
+
 	return (
 		<div>
 			<div className="search--poffline">
@@ -89,7 +96,7 @@ const Pwf = () => {
 						Send request
 					</button>
 				</form>
-				<button className="playOffline">Play with computer</button>
+				<button className="playOffline" onClick={handlePwcClick}>Play with computer</button>
 			</div>
 			<div className="score--reset">
 				<ScoreBoard scores={scores} player={player} />

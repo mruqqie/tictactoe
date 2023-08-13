@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "../box/Box";
 import Reset from "../reset/Reset";
 import ScoreBoard from "../scoreBoard/ScoreBoard";
@@ -6,6 +7,8 @@ import chatIcon from "../../imgs/chaticon.svg";
 import "./Pwc.css";
 
 const Pwc = () => {
+	const navigate = useNavigate();
+
 	const [search, setSearch] = useState("");
 	const [mark, setMark] = useState(Array(9).fill(null));
 	const [player, setPlayer] = useState(Math.random() < 0.5);
@@ -86,40 +89,6 @@ const Pwc = () => {
 			}
 		}
 	};
-
-	// const handleClick = (boxIndex) => {
-	// 	const updatedBoard = mark.map((value, index) => {
-	// 		if (index === boxIndex) {
-	// 			return player === true ? "X" : "O";
-	// 		} else {
-	// 			return value;
-	// 		}
-	// 	});
-
-	// 	const winner = checkWinner(updatedBoard);
-	// 	if (winner) {
-	// 		if (winner === "O") {
-	// 			let { oScore } = scores;
-	// 			if (gameOver === false) {
-	// 				oScore += 1;
-	// 			}
-	// 			setScores({ ...scores, oScore });
-	// 			setGameOver(true);
-	// 		} else {
-	// 			let { xScore } = scores;
-	// 			if (gameOver === false) {
-	// 				xScore += 1;
-	// 			}
-	// 			setScores({ ...scores, xScore });
-	// 			setGameOver(true);
-	// 		}
-	// 	}
-
-	// 	if (gameOver === false) {
-	// 		setMark(updatedBoard);
-	// 		setPlayer(!player);
-	// 	}
-	// };
 
 	const checkWinner = (board) => {
 		for (let i = 0; i < winConditions.length; i++) {
@@ -239,6 +208,11 @@ const Pwc = () => {
 			}
 		});
 	};
+
+	const handlePwfClick = () => {
+		navigate("/playwfriend")
+	}
+
 	return (
 		<div>
 			<div className="search--poffline">
@@ -255,7 +229,7 @@ const Pwc = () => {
 						Send request
 					</button>
 				</form>
-				<button className="playOffline">Play with a friend offline</button>
+				<button className="playOffline" onClick={handlePwfClick}>Play with a friend offline</button>
 			</div>
 			<div className="score--reset">
 				<ScoreBoard scores={scores} player={player} />
