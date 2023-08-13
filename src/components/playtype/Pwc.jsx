@@ -245,13 +245,13 @@ const Pwc = () => {
 					);
 				})}
 			</div>
-			<div className="req--chat">
+			{/* <div className="req--chat">
 				<button className="req">Requests</button>
 				<button className="chat">
 					<div>Chat</div>
 					<img className="chatIcon" src={chatIcon} />
 				</button>
-			</div>
+			</div> */}
 		</div>
 	);
 };
