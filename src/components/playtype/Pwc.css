@@ -94,7 +94,8 @@
 }
 
 .req--chat {
-    display: flex;
+    display: none;
+    /* display: flex; */
     width: 95vw;
     margin: 0px auto;
     height: 40px;

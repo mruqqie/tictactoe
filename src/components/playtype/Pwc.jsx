@@ -210,7 +210,7 @@ const Pwc = () => {
 	};
 
 	const handlePwfClick = () => {
-		navigate("/tictactoe/playwfriend")
+		navigate("/playwfriend")
 	}
 
 	return (
