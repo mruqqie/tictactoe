@@ -77,7 +77,7 @@ const Pwf = () => {
 	};
 
 	const handlePwcClick = () => {
-		navigate("/tictactoe")
+		navigate("/")
 	}
 
 	return (
