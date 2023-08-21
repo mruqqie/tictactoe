@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Register.css"
 
 const Register = () => {
+	const [username, setUsername] = useState("")
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
@@ -10,6 +11,17 @@ const Register = () => {
 		<div>
 			<form className="regForm">
 				<div className="register">Register</div>
+				<div className="input">
+					<label className="regLabel">Username</label>
+					<input
+						className="regInput"
+						placeholder="Username"
+						value={username}
+						onChange={(e) => {
+							setEmail(e.target.value);
+						}}
+					/>
+				</div>
 				<div className="input">
 					<label className="regLabel">Email</label>
 					<input
